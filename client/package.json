@@ -26,7 +26,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --cache --write '**/*.{js,jsx}'",
+    "lint": "eslint --cache '**/*.{js,jsx}'"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "eslint-config-prettier": "^8.8.0",
     "prettier": "2.8.3"
   }
 }
