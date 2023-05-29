@@ -25,26 +25,25 @@ const Home = ({ login }) => {
   const token = getCookie('accessToken');
 
   //달력 외부 영역 클릭 시 닫힘
-  const handleClickOutside = e => {
+  const handleClickOutside = (e) => {
     if (showCalendar && !calenderRef.current.contains(e.target)) {
       setShowCalendar(false);
     }
   };
 
   useEffect(() => {
-    if (showCalendar)
-      document.addEventListener('mousedown', handleClickOutside);
+    if (showCalendar) document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [showCalendar]);
 
-  const handleDate = date => {
+  const handleDate = (date) => {
     setStartDate(formatDate(date[0].startDate));
     setEndDate(formatDate(date[0].endDate));
   };
 
-  const handleDestination = destination => {
+  const handleDestination = (destination) => {
     setDestination(destination);
   };
 
@@ -83,11 +82,10 @@ const Home = ({ login }) => {
               },
             },
           )
-          .then(res => navigate(`/itinerary/${res.data.data.planId}`));
+          .then((res) => navigate(`/itinerary/${res.data.data.planId}`));
       } else {
         localStorage.setItem('plan', JSON.stringify(data));
-        if (window.confirm('로그인 후 이용 가능합니다. 로그인 하시겠습니까?'))
-          navigate('/login');
+        if (window.confirm('로그인 후 이용 가능합니다. 로그인 하시겠습니까?')) navigate('/login');
       }
     }
   };
@@ -136,11 +134,7 @@ const Home = ({ login }) => {
             </button>
           </BottomSection>
           {showCalendar && (
-            <Calendar
-              calenderRef={calenderRef}
-              handleDate={handleDate}
-              login={login}
-            />
+            <Calendar calenderRef={calenderRef} handleDate={handleDate} login={login} />
           )}
         </Content>
       </Main>

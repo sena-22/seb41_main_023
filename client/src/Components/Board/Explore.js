@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { getCookie } from '../../Util/Cookies';
 import { formatDateKo } from '../../Util/dayUtil';
 
-const Explore = props => {
+const Explore = (props) => {
   const [exploreList, setExploreList] = useState([]);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -29,18 +29,18 @@ const Explore = props => {
           },
         },
       )
-      .then(res => {
+      .then((res) => {
         if (page.current === 1) setExploreList(res.data.data);
         if (page.current > 1) {
           setTimeout(() => {
-            setExploreList(prevState => [...prevState, ...res.data.data]);
+            setExploreList((prevState) => [...prevState, ...res.data.data]);
             setLoading(false);
           }, 500);
         }
         setHasNextPage(res.data.data.length === 10);
         if (res.data.data.length) page.current += 1;
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
@@ -55,11 +55,11 @@ const Explore = props => {
             },
           },
         )
-        .then(res => {
+        .then((res) => {
           setExploreList(res.data.data);
           setLoading(false);
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     } else {
       // 게시판
       if (window.location.pathname === '/board') {
@@ -83,40 +83,34 @@ const Explore = props => {
           };
         } else {
           axios
-            .get(
-              `${process.env.REACT_APP_API_URL}/board?page=1&size=100&tab=${props.mode}`,
-              {
-                headers: {
-                  Authorization: token,
-                },
+            .get(`${process.env.REACT_APP_API_URL}/board?page=1&size=100&tab=${props.mode}`, {
+              headers: {
+                Authorization: token,
               },
-            )
-            .then(res => {
+            })
+            .then((res) => {
               setExploreList(res.data.data);
               setLoading(false);
             })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
         }
       } else {
         // 메인
         axios
-          .get(
-            `${process.env.REACT_APP_API_URL}/board?page=1&size=5&tab=${props.mode}`,
-            {
-              headers: {
-                Authorization: token,
-              },
+          .get(`${process.env.REACT_APP_API_URL}/board?page=1&size=5&tab=${props.mode}`, {
+            headers: {
+              Authorization: token,
             },
-          )
-          .then(res => {
+          })
+          .then((res) => {
             setExploreList(res.data.data);
           })
-          .catch(err => console.log(err));
+          .catch((err) => console.log(err));
       }
     }
   }, [hasNextPage, token, props.destination, props.mode, fetchMoreExplores]);
 
-  const handleNavigate = explore => {
+  const handleNavigate = (explore) => {
     navigate(`/board/${explore.boardId}`);
   };
 
@@ -125,16 +119,8 @@ const Explore = props => {
       <div className="contents">
         {exploreList.length !== 0 ? (
           exploreList.map((explore, index) => (
-            <div
-              className="my-logs__card"
-              key={index}
-              onClick={() => handleNavigate(explore)}
-            >
-              <img
-                className="meta__travel-image"
-                alt="place_image"
-                src={explore.cityImage}
-              />
+            <div className="my-logs__card" key={index} onClick={() => handleNavigate(explore)}>
+              <img className="meta__travel-image" alt="place_image" src={explore.cityImage} />
               <div className="meta_title">{explore.title}</div>
               <div className="meta_content">
                 {formatDateKo(explore.travelPeriod.split('-')[0])} -{' '}
@@ -171,19 +157,11 @@ const Explore = props => {
                 <span>{explore.views}</span>
               </div>
               <div className="meta_profile">
-                <img
-                  className="profile__image"
-                  alt="profile_image"
-                  src={explore.profileImage}
-                />
+                <img className="profile__image" alt="profile_image" src={explore.profileImage} />
                 <span>{explore.displayName} </span>
               </div>
               {token && (
-                <div
-                  className={
-                    explore.checkLikes ? 'meta_likes likes' : 'meta_likes'
-                  }
-                >
+                <div className={explore.checkLikes ? 'meta_likes likes' : 'meta_likes'}>
                   <svg viewBox="0 0 16 16">
                     <path
                       fillRule="evenodd"

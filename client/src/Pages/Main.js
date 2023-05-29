@@ -84,31 +84,19 @@ const Main = () => {
           <h2>Explore</h2>
           <div className={'selection__tab'}>
             <button
-              className={
-                mode === 'boardId'
-                  ? 'mode--selected mode--button'
-                  : 'mode--button'
-              }
+              className={mode === 'boardId' ? 'mode--selected mode--button' : 'mode--button'}
               onClick={() => setMode('boardId')}
             >
               최신순
             </button>
             <button
-              className={
-                mode === 'likes'
-                  ? 'mode--selected mode--button'
-                  : 'mode--button'
-              }
+              className={mode === 'likes' ? 'mode--selected mode--button' : 'mode--button'}
               onClick={() => setMode('likes')}
             >
               좋아요순
             </button>
             <button
-              className={
-                mode === 'views'
-                  ? 'mode--selected mode--button'
-                  : 'mode--button'
-              }
+              className={mode === 'views' ? 'mode--selected mode--button' : 'mode--button'}
               onClick={() => setMode('views')}
             >
               조회수순
@@ -118,10 +106,7 @@ const Main = () => {
         <Explore mode={mode} />
       </Content>
       <Footer />
-      <button
-        className="button--default button--subtle button--top"
-        onClick={TopMove}
-      >
+      <button className="button--default button--subtle button--top" onClick={TopMove}>
         Top
       </button>
     </MainContainer>

@@ -11,5 +11,5 @@ root.render(
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </CookiesProvider>
+  </CookiesProvider>,
 );

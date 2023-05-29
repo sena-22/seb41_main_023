@@ -24,7 +24,7 @@ const Board = () => {
     setSearch(true);
   };
 
-  const handleDestination = destination => {
+  const handleDestination = (destination) => {
     setDestination(destination);
   };
 
@@ -36,11 +36,7 @@ const Board = () => {
     if (login) {
       navigate('/board/plan');
     } else {
-      if (
-        window.confirm(
-          '게시글 작성은 로그인 후에 사용 가능합니다. 로그인하시겠습니까?',
-        )
-      )
+      if (window.confirm('게시글 작성은 로그인 후에 사용 가능합니다. 로그인하시겠습니까?'))
         navigate('/login');
     }
   };
@@ -65,12 +61,8 @@ const Board = () => {
           <h2>Explore</h2>
           <div className={'selection__tab'}>
             <button
-              className={
-                mode === 'boardId'
-                  ? 'mode--selected mode--button'
-                  : 'mode--button'
-              }
-              onClick={e => {
+              className={mode === 'boardId' ? 'mode--selected mode--button' : 'mode--button'}
+              onClick={(e) => {
                 if (destination) e.preventDefault();
                 else window.location.reload();
                 setMode('boardId');
@@ -79,11 +71,7 @@ const Board = () => {
               최신순
             </button>
             <button
-              className={
-                mode === 'likes'
-                  ? 'mode--selected mode--button'
-                  : 'mode--button'
-              }
+              className={mode === 'likes' ? 'mode--selected mode--button' : 'mode--button'}
               onClick={() => {
                 setMode('likes');
               }}
@@ -91,11 +79,7 @@ const Board = () => {
               좋아요순
             </button>
             <button
-              className={
-                mode === 'views'
-                  ? 'mode--selected mode--button'
-                  : 'mode--button'
-              }
+              className={mode === 'views' ? 'mode--selected mode--button' : 'mode--button'}
               onClick={() => {
                 setMode('views');
               }}
@@ -107,16 +91,8 @@ const Board = () => {
             Write log
           </button>
         </div>
-        <Explore
-          search={search}
-          setSearch={setSearch}
-          destination={destination}
-          mode={mode}
-        />
-        <button
-          className="button--default button--subtle button--top"
-          onClick={TopMove}
-        >
+        <Explore search={search} setSearch={setSearch} destination={destination} mode={mode} />
+        <button className="button--default button--subtle button--top" onClick={TopMove}>
           Top
         </button>
       </MainContainer>

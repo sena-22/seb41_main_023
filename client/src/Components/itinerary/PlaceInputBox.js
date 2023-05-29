@@ -29,19 +29,12 @@ const InputContainer = styled.div`
   }
 `;
 
-const PlaceInputBox = props => {
-  const {
-    searchBox,
-    setSearchBox,
-    singlePlanData,
-    handleGeoCode,
-    refresh,
-    handleRefresh,
-  } = props;
+const PlaceInputBox = (props) => {
+  const { searchBox, setSearchBox, singlePlanData, handleGeoCode, refresh, handleRefresh } = props;
 
   const [selectedDateId, setSelectedDateId] = useState(null);
 
-  const onLoad = ref => {
+  const onLoad = (ref) => {
     setSearchBox(ref);
   };
 
@@ -81,10 +74,10 @@ const PlaceInputBox = props => {
             },
           },
         )
-        .then(res => {
+        .then((res) => {
           handleRefresh();
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
 
       handleGeoCode(lat, lng);
     }
@@ -94,7 +87,7 @@ const PlaceInputBox = props => {
     }
   };
 
-  const handleOnKeyPress = event => {
+  const handleOnKeyPress = (event) => {
     if (event.key === 'Enter') {
       event.target.value = '';
     }

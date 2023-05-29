@@ -2,18 +2,13 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-const Autocomplete = ({
-  handleDestination,
-  inputRef,
-  setSearch,
-  handleSearch,
-}) => {
+const Autocomplete = ({ handleDestination, inputRef, setSearch, handleSearch }) => {
   const [city, setCity] = useState();
 
   const getCity = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/city`, {})
-      .then(res => setCity(res.data.data.map(el => el.cityName)));
+      .then((res) => setCity(res.data.data.map((el) => el.cityName)));
   };
 
   useEffect(() => {
@@ -39,11 +34,10 @@ const Autocomplete = ({
   ];
 
   const con2syl = Object.fromEntries(orderOffest);
-  const pattern = ch => {
+  const pattern = (ch) => {
     let r;
     if (reJa.test(ch)) {
-      const begin =
-        con2syl[ch] || (ch.charCodeAt(0) - 12613) * 588 + con2syl['ㅅ'];
+      const begin = con2syl[ch] || (ch.charCodeAt(0) - 12613) * 588 + con2syl['ㅅ'];
       const end = begin + 587;
       r = `[${ch}\\u${begin.toString(16)}-\\u${end.toString(16)}]`;
     } else if (reChar.test(ch)) {
@@ -89,10 +83,10 @@ const Autocomplete = ({
     }
 
     return city
-      .filter(option => {
+      .filter((option) => {
         return isInitialMatch(inputValue, option);
       })
-      .map(option => {
+      .map((option) => {
         return option;
       })
       .slice(0, 8);
@@ -110,19 +104,19 @@ const Autocomplete = ({
   }, [inputValue]);
   // input을 입력할 때마다, input을 포함한 요소들만 모아 options 배열 업데이트
 
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     setInputValue(event.target.value);
     setHasText(true);
   };
   // input의 onChange 이벤트 때, 입력값을 inputValue에 저장하고 hasText값 갱신
 
-  const handleDropDownClick = clickedOption => {
+  const handleDropDownClick = (clickedOption) => {
     setInputValue(clickedOption);
     setHasText(false);
   };
   // 보여지는 자동완성 값 중 하나를 클릭하면 해당 값이 input에 할당
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (e) => {
     //enter 키를 누르면 input 값이 활성화된 옵션으로 변경
     if (e.keyCode === 13) {
       if (inputValue === '') window.location.reload();
@@ -201,11 +195,7 @@ export const DropDown = ({ options, handleComboBox, activeSuggestion }) => {
           className = 'active';
         }
         return (
-          <li
-            key={option}
-            onClick={() => handleComboBox(option)}
-            className={className}
-          >
+          <li key={option} onClick={() => handleComboBox(option)} className={className}>
             {option}
           </li>
         );
@@ -254,8 +244,7 @@ const DropDownContainer = styled.ul`
   border: 1px solid var(--light-gray-4);
   border-radius: 3px;
   list-style: none;
-  box-shadow: 0px 0px 1px rgba(9, 30, 66, 0.31),
-    0px 8px 12px rgba(9, 30, 66, 0.15);
+  box-shadow: 0px 0px 1px rgba(9, 30, 66, 0.31), 0px 8px 12px rgba(9, 30, 66, 0.15);
   z-index: 999;
 
   li {

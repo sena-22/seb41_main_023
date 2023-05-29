@@ -43,7 +43,7 @@ const SingleBoard = () => {
           Authorization: getCookie('accessToken'),
         },
       })
-      .then(res => {
+      .then((res) => {
         setBoardData(res.data);
         const startCode = res.data.days[0].placeDetails[0];
         startCode &&
@@ -52,7 +52,7 @@ const SingleBoard = () => {
             lng: startCode.longitude,
           });
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }, [boardId, refresh]);
 
   const handleGeoCode = (lat, lng) => {
@@ -69,11 +69,7 @@ const SingleBoard = () => {
       {boardData ? (
         <BoardWrapper>
           <TopSection boardData={boardData} handleRefresh={handleRefresh} />
-          <MapSection
-            boardData={boardData}
-            geocode={geocode}
-            handleGeoCode={handleGeoCode}
-          />
+          <MapSection boardData={boardData} geocode={geocode} handleGeoCode={handleGeoCode} />
           <BoardSection boardData={boardData} handleGeoCode={handleGeoCode} />
           <CommentSection />
         </BoardWrapper>

@@ -3,19 +3,19 @@ import { MarkerF } from '@react-google-maps/api';
 
 import InfoWindow from '../../itinerary/InfoWindow';
 
-export const Markers = props => {
+export const Markers = (props) => {
   const { data, handleGeoCode, handleZoom, isOpen, setIsOpen } = props;
 
   const [isMarkerActive, setIsMarkerActive] = useState(null);
 
-  const handleInfoWindow = marker => {
+  const handleInfoWindow = (marker) => {
     if (marker === isMarkerActive) {
       return;
     }
     setIsMarkerActive(marker);
   };
 
-  const makeColor = day => {
+  const makeColor = (day) => {
     if (day % 7 === 0) return 'deepskyblue';
     if (day % 7 === 1) return 'orchid';
     if (day % 7 === 2) return 'lightcoral';
@@ -25,7 +25,7 @@ export const Markers = props => {
     if (day % 7 === 6) return 'turquoise';
   };
 
-  const makeStrokeColor = day => {
+  const makeStrokeColor = (day) => {
     if (day % 7 === 0) return 'dodgerblue';
     if (day % 7 === 1) return 'mediumorchid';
     if (day % 7 === 2) return 'indianred';
@@ -35,7 +35,7 @@ export const Markers = props => {
     if (day % 7 === 6) return 'darkturquoise';
   };
 
-  const makeLabelColor = day => {
+  const makeLabelColor = (day) => {
     if (day % 7 === 0) return '#115496';
     if (day % 7 === 1) return '#7d1596';
     if (day % 7 === 2) return '#731717';
@@ -64,7 +64,7 @@ export const Markers = props => {
               handleInfoWindow(place.placeId);
               handleGeoCode(place.latitude, place.longitude);
               handleZoom();
-              setIsOpen(prevState => !prevState);
+              setIsOpen((prevState) => !prevState);
             }}
             label={{
               text: (idx + 1).toString(),

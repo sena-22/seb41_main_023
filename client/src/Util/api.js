@@ -52,7 +52,7 @@ const patchBaseData = async (url, data) => {
 };
 
 //delete 요청
-const deleteBaseData = async url => {
+const deleteBaseData = async (url) => {
   try {
     const res = await baseInstance.delete(url);
     return res;
@@ -94,7 +94,7 @@ const patchData = async (url, data) => {
 };
 
 //delete 요청
-const deleteData = async url => {
+const deleteData = async (url) => {
   try {
     const res = await authInstance.delete(url);
     return res;
@@ -115,8 +115,7 @@ const getAccessToken = async () => {
         },
       },
     );
-    if (response.status === 200)
-      setCookie('accessToken', response.headers.authorization);
+    if (response.status === 200) setCookie('accessToken', response.headers.authorization);
   } catch (err) {
     console.error(err);
   }

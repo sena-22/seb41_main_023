@@ -18,10 +18,7 @@ const Category = ({ setCategory, handleCategory }) => {
   ];
 
   return (
-    <CategoryDropdown
-      defaultValue={'default'}
-      onChange={e => handleCategory(e.target.value)}
-    >
+    <CategoryDropdown defaultValue={'default'} onChange={(e) => handleCategory(e.target.value)}>
       <option value="default" disabled>
         항목을 선택하세요
       </option>

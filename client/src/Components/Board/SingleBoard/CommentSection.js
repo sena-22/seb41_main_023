@@ -21,56 +21,47 @@ const CommentSection = () => {
   const offset = (page - 1) * limit;
   const commentRef = useRef();
   const handleCommentRefresh = () => {
-    setCommentRefresh(prevState => prevState * -1);
+    setCommentRefresh((prevState) => prevState * -1);
   };
 
   const handleCommentSubmit = () => {
     const commentData = { comment: commentRef.current?.value };
     axios
-      .post(
-        `${process.env.REACT_APP_API_URL}/comments/board/${boardId}`,
-        commentData,
-        {
-          headers: {
-            Authorization: getCookie('accessToken'),
-          },
+      .post(`${process.env.REACT_APP_API_URL}/comments/board/${boardId}`, commentData, {
+        headers: {
+          Authorization: getCookie('accessToken'),
         },
-      )
-      .then(res => {
+      })
+      .then((res) => {
         handleCommentRefresh();
       })
-      .then(res => (commentRef.current.value = ''))
-      .catch(err => {
-        alert(
-          `댓글은 ${err.response.data.fieldErrors[0].reason}. 최소 1글자 이상 입력해주세요!`,
-        );
+      .then((res) => (commentRef.current.value = ''))
+      .catch((err) => {
+        alert(`댓글은 ${err.response.data.fieldErrors[0].reason}. 최소 1글자 이상 입력해주세요!`);
       });
   };
 
   useEffect(() => {
     axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/comments/board/${boardId}?page=1&size=100`,
-        {
-          headers: {
-            Authorization: getCookie('accessToken'),
-          },
+      .get(`${process.env.REACT_APP_API_URL}/comments/board/${boardId}?page=1&size=100`, {
+        headers: {
+          Authorization: getCookie('accessToken'),
         },
-      )
-      .then(res => {
+      })
+      .then((res) => {
         setCommentList(res.data.data);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }, [boardId, commentRefresh]);
 
   useEffect(() => {
     if (memberId) {
       axios
         .get(`${process.env.REACT_APP_API_URL}/members/${memberId}`)
-        .then(res => {
+        .then((res) => {
           setMemberData(res.data);
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     }
   }, []);
 
@@ -82,7 +73,7 @@ const CommentSection = () => {
           {commentList &&
             commentList
               .slice(offset, offset + limit)
-              .map(comment => (
+              .map((comment) => (
                 <SingleComment
                   key={comment.commentId}
                   comment={comment}
@@ -95,10 +86,7 @@ const CommentSection = () => {
         {memberId && (
           <CommentInputContainer>
             <div className="comment__user-image">
-              <img
-                src={memberData.profileImage}
-                alt={`${memberData.displayName}의 이미지`}
-              />
+              <img src={memberData.profileImage} alt={`${memberData.displayName}의 이미지`} />
             </div>
             <input
               className="input--default"
@@ -112,12 +100,7 @@ const CommentSection = () => {
           </CommentInputContainer>
         )}
       </div>
-      <Pagination
-        total={commentList.length}
-        limit={limit}
-        page={page}
-        setPage={setPage}
-      />
+      <Pagination total={commentList.length} limit={limit} page={page} setPage={setPage} />
     </CommentWrapper>
   );
 };

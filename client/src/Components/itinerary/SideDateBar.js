@@ -46,13 +46,13 @@ const DateBox = styled.div`
   }
 `;
 
-const SideDateBar = props => {
+const SideDateBar = (props) => {
   const { singlePlanData, onDateClick } = props;
 
   return (
     <LeftSideBar>
       <h5>Dates</h5>
-      {singlePlanData.map(date => (
+      {singlePlanData.map((date) => (
         <DateBox key={date.planDateId}>
           <button onClick={() => onDateClick(date.planDateId)}>
             <span>{formatMonthAndDay(date.planDate)}</span>

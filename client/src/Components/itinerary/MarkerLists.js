@@ -5,18 +5,18 @@ import InfoWindow from './InfoWindow';
 
 import { dayOfTheWeekKo } from '../../Util/dayUtil';
 
-const MarkerLists = props => {
+const MarkerLists = (props) => {
   const { data, handleGeoCode, handleZoom } = props;
 
   const [activeMarker, setActiveMarker] = useState(null);
-  const handleInfoWindow = marker => {
+  const handleInfoWindow = (marker) => {
     if (marker === activeMarker) {
       return;
     }
     setActiveMarker(marker);
   };
 
-  const makeColor = day => {
+  const makeColor = (day) => {
     if (day === '월') return 'deepskyblue';
     if (day === '화') return 'orchid';
     if (day === '수') return 'lightcoral';
@@ -26,7 +26,7 @@ const MarkerLists = props => {
     if (day === '일') return 'turquoise';
   };
 
-  const makeStrokeColor = day => {
+  const makeStrokeColor = (day) => {
     if (day === '월') return 'dodgerblue';
     if (day === '화') return 'mediumorchid';
     if (day === '수') return 'indianred';
@@ -36,7 +36,7 @@ const MarkerLists = props => {
     if (day === '일') return 'darkturquoise';
   };
 
-  const makeLabelColor = day => {
+  const makeLabelColor = (day) => {
     if (day === '월') return '#115496';
     if (day === '화') return '#7d1596';
     if (day === '수') return '#731717';

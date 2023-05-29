@@ -35,10 +35,7 @@ function App() {
       }
     }, 1790000);
 
-    if (
-      localStorage.getItem('refreshToken') &&
-      performance.navigation.type === 1
-    ) {
+    if (localStorage.getItem('refreshToken') && performance.navigation.type === 1) {
       setTimeout(() => {
         getAccessToken();
       }, 60000);

@@ -1,13 +1,13 @@
 /* 유저이름, 비밀번호 수정, 계정 삭제 */
 
-import { useEffect, useState } from "react";
-import axios from "axios";
-import styled from "styled-components";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import styled from 'styled-components';
 
-import { patchData } from "../../Util/api";
-import { getCookie, removeCookie } from "../../Util/Cookies";
+import { patchData } from '../../Util/api';
+import { getCookie, removeCookie } from '../../Util/Cookies';
 
-import Modal from "./Modal";
+import Modal from './Modal';
 
 // 유저이름 수정
 const General = ({ handleChange, handleSubmit, nameRef }) => {
@@ -35,16 +35,15 @@ const General = ({ handleChange, handleSubmit, nameRef }) => {
 
 // 비밀번호 수정
 const Password = () => {
-  const memberId = getCookie("memberId");
+  const memberId = getCookie('memberId');
   const [inputs, setInputs] = useState({
-    originPassword: "",
-    newPassword: "",
+    originPassword: '',
+    newPassword: '',
   });
 
   const [valueCheck, setValueCheck] = useState(true);
   //유효성 검사(숫자, 영문, 특수문자 조합한 8~20자리)
-  const passwordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&#]{8,}$/i;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&#]{8,}$/i;
 
   useEffect(() => {
     const passwordValueCheck = passwordRegex.test(inputs.newPassword);
@@ -79,10 +78,10 @@ const Password = () => {
       password: inputs.newPassword,
     }).then((res) => {
       if (res) {
-        setInputs({ originPassword: "", newPassword: "" });
-        alert("비밀번호가 변경되었습니다");
+        setInputs({ originPassword: '', newPassword: '' });
+        alert('비밀번호가 변경되었습니다');
       } else {
-        alert("비밀번호를 확인해주세요");
+        alert('비밀번호를 확인해주세요');
       }
     });
   };
@@ -110,8 +109,7 @@ const Password = () => {
         ></input>
         {!valueCheck ? (
           <div className="password__instruction">
-            숫자, 영문, 특수문자(!, & 등)를 조합한 8~20자리의 비밀번호를
-            입력하세요.
+            숫자, 영문, 특수문자(!, & 등)를 조합한 8~20자리의 비밀번호를 입력하세요.
           </div>
         ) : null}
       </div>
@@ -126,30 +124,27 @@ const Password = () => {
 
 /* 계정 삭제 */
 const DeleteAccount = ({ modal, setModal }) => {
-  const memberId = getCookie("memberId");
-  const token = getCookie("accessToken");
-  const refreshToken = localStorage.getItem("refreshToken");
+  const memberId = getCookie('memberId');
+  const token = getCookie('accessToken');
+  const refreshToken = localStorage.getItem('refreshToken');
 
   const handleDeleteAccount = async () => {
     try {
-      const res = await axios.delete(
-        `${process.env.REACT_APP_API_URL}/members/${memberId}`,
-        {
-          headers: {
-            Authorization: token,
-          },
-          data: {
-            accessToken: token,
-            refreshToken: refreshToken,
-          },
-        }
-      );
+      const res = await axios.delete(`${process.env.REACT_APP_API_URL}/members/${memberId}`, {
+        headers: {
+          Authorization: token,
+        },
+        data: {
+          accessToken: token,
+          refreshToken: refreshToken,
+        },
+      });
 
       if (res) {
-        removeCookie("accessToken");
-        removeCookie("memberId");
-        localStorage.removeItem("refreshToken");
-        alert("그동안 이용해주셔서 감사합니다.");
+        removeCookie('accessToken');
+        removeCookie('memberId');
+        localStorage.removeItem('refreshToken');
+        alert('그동안 이용해주셔서 감사합니다.');
         setModal(!modal);
       }
     } catch (e) {

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Category from './Category';
 
-const EditExpense = props => {
+const EditExpense = (props) => {
   const {
     expense,
     allExpenses,
@@ -23,13 +23,13 @@ const EditExpense = props => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   //카테고리 변경
-  const handleCategory = el => {
+  const handleCategory = (el) => {
     setSelectedCategory(el);
     setCategory(false);
   };
 
   // 지출 금액, 지출 항목 변경
-  const handleInputs = e => {
+  const handleInputs = (e) => {
     // 지출 금액에 숫자 외의 입력 값은 ""로 대체
     if (e.target.name === 'price') {
       const value = e.target.value;
@@ -40,21 +40,16 @@ const EditExpense = props => {
     }
   };
 
-  const expenseData = allExpenses?.filter(
-    expense => expense.expenseId === expenseId,
-  )[0].price;
+  const expenseData = allExpenses?.filter((expense) => expense.expenseId === expenseId)[0].price;
 
   return (
     <>
       {editExpenseModal ? (
         <ModalContainer onClick={() => setEditExpenseModal(false)}>
-          <ModalWrapper onClick={e => e.stopPropagation()}>
+          <ModalWrapper onClick={(e) => e.stopPropagation()}>
             <div className="modal__header">
               <div className="title">Edit expense</div>
-              <div
-                className="cancel-button"
-                onClick={() => setEditExpenseModal(false)}
-              >
+              <div className="cancel-button" onClick={() => setEditExpenseModal(false)}>
                 <svg viewBox="0 0 16 16" className="css-1aecrfn">
                   <path
                     fillRule="evenodd"
@@ -91,10 +86,7 @@ const EditExpense = props => {
                 />
               </div>
               <div className="input__container">
-                <Category
-                  setCategory={setCategory}
-                  handleCategory={handleCategory}
-                />
+                <Category setCategory={setCategory} handleCategory={handleCategory} />
               </div>
               <div className="input__container">
                 <input
@@ -113,20 +105,13 @@ const EditExpense = props => {
                   const priceSelect = expenseData ? expenseData : expense.price;
                   if (
                     budget.expectedBudget <
-                    parseInt(budget.totalExpenses) -
-                      parseInt(priceSelect) +
-                      parseInt(inputs.price)
+                    parseInt(budget.totalExpenses) - parseInt(priceSelect) + parseInt(inputs.price)
                   ) {
                     alert('비용이 예산을 초과합니다!!');
                     setEditExpenseModal(true);
                     setInputs({ price: '', item: '' });
                   } else {
-                    handleEditExpense(
-                      inputs.price,
-                      selectedCategory,
-                      inputs.item,
-                      submitId,
-                    );
+                    handleEditExpense(inputs.price, selectedCategory, inputs.item, submitId);
                     handleBudgetRefresh();
                   }
                 }}
@@ -167,8 +152,7 @@ const ModalWrapper = styled.div`
   min-width: 460px;
   background-color: var(--white);
   border-radius: 5px;
-  box-shadow: 0px 0px 1px rgba(9, 30, 66, 0.31),
-    0px 8px 12px rgba(9, 30, 66, 0.15);
+  box-shadow: 0px 0px 1px rgba(9, 30, 66, 0.31), 0px 8px 12px rgba(9, 30, 66, 0.15);
 
   .modal__header {
     display: flex;

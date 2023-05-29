@@ -1,5 +1,5 @@
 export const Mode = {
-  Write: "write",
-  Plan: "plan",
-  Edit: "edit",
+  Write: 'write',
+  Plan: 'plan',
+  Edit: 'edit',
 };

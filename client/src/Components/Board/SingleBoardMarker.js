@@ -10,14 +10,14 @@ const SingleBoardMarker = ({ day, handleZoom }) => {
   const [closeInfo, setCloseInfo] = useState(false);
   const date = day.day.split(' ')[1];
 
-  const handleInfoWindow = marker => {
+  const handleInfoWindow = (marker) => {
     if (marker === activeMarker) {
       return;
     }
     setActiveMarker(marker);
   };
 
-  const onLoad = marker => {};
+  const onLoad = (marker) => {};
 
   const handleGeoCode = (lat, lng) => {
     setGeocode({ lat, lng });
@@ -28,7 +28,7 @@ const SingleBoardMarker = ({ day, handleZoom }) => {
     lng: 0,
   });
 
-  const makeColor = date => {
+  const makeColor = (date) => {
     if (date % 7 === 0) return 'deepskyblue';
     if (date % 7 === 1) return 'orchid';
     if (date % 7 === 2) return 'lightcoral';
@@ -38,7 +38,7 @@ const SingleBoardMarker = ({ day, handleZoom }) => {
     if (date % 7 === 6) return 'turquoise';
   };
 
-  const makeStrokeColor = date => {
+  const makeStrokeColor = (date) => {
     if (date % 7 === 0) return 'dodgerblue';
     if (date % 7 === 1) return 'mediumorchid';
     if (date % 7 === 2) return 'indianred';
@@ -48,7 +48,7 @@ const SingleBoardMarker = ({ day, handleZoom }) => {
     if (date % 7 === 6) return 'darkturquoise';
   };
 
-  const makeLabelColor = date => {
+  const makeLabelColor = (date) => {
     if (date % 7 === 0) return '#115496';
     if (date % 7 === 1) return '#7d1596';
     if (date % 7 === 2) return '#731717';

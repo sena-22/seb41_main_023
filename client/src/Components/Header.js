@@ -23,9 +23,7 @@ const Header = ({ login }) => {
           Authorization: token,
         },
       })
-      .then(res =>
-        setUserInfo({ ...userInfo, profileImage: res.data.profileImage }),
-      );
+      .then((res) => setUserInfo({ ...userInfo, profileImage: res.data.profileImage }));
   };
 
   useEffect(() => {
@@ -34,7 +32,7 @@ const Header = ({ login }) => {
     }
   }, []);
 
-  const handleNavigate = path => {
+  const handleNavigate = (path) => {
     navigate(path);
   };
 
@@ -45,7 +43,7 @@ const Header = ({ login }) => {
         headers: {
           Authorization: token,
         },
-      }).then(res => {
+      }).then((res) => {
         removeCookie('accessToken');
         removeCookie('memberId');
         localStorage.removeItem('refreshToken');
@@ -76,25 +74,16 @@ const Header = ({ login }) => {
               alt="profile_image"
               src={userInfo.profileImage}
             />
-            <button
-              className="button--default button--subtle"
-              onClick={handleSignOut}
-            >
+            <button className="button--default button--subtle" onClick={handleSignOut}>
               Sign out
             </button>
           </>
         ) : (
           <>
-            <button
-              className="button--default"
-              onClick={() => handleNavigate('/login')}
-            >
+            <button className="button--default" onClick={() => handleNavigate('/login')}>
               Log In
             </button>
-            <button
-              className="button--primary"
-              onClick={() => handleNavigate('/signup')}
-            >
+            <button className="button--primary" onClick={() => handleNavigate('/signup')}>
               Sign Up
             </button>
           </>

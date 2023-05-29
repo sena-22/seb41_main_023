@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-const EditBudget = props => {
-  const { budget, editBudget, setEditBudget, handleEditBudget, originBudget } =
-    props;
+const EditBudget = (props) => {
+  const { budget, editBudget, setEditBudget, handleEditBudget, originBudget } = props;
   const [inputBudget, setInputBudget] = useState(originBudget);
 
-  const handleInputBudget = e => {
+  const handleInputBudget = (e) => {
     const value = e.target.value;
     const onlyNumber = value.replace(/[^0-9]/g, '');
     setInputBudget(onlyNumber);
@@ -16,13 +15,10 @@ const EditBudget = props => {
     <>
       {editBudget ? (
         <ModalContainer onClick={() => setEditBudget(false)}>
-          <ModalWrapper onClick={e => e.stopPropagation()}>
+          <ModalWrapper onClick={(e) => e.stopPropagation()}>
             <div className="modal__header">
               <div className="title">Set budget</div>
-              <div
-                className="cancel-button"
-                onClick={() => setEditBudget(false)}
-              >
+              <div className="cancel-button" onClick={() => setEditBudget(false)}>
                 <svg viewBox="0 0 16 16" className="css-1aecrfn">
                   <path
                     fillRule="evenodd"
@@ -112,8 +108,7 @@ const ModalWrapper = styled.div`
   min-width: 460px;
   background-color: var(--white);
   border-radius: 5px;
-  box-shadow: 0px 0px 1px rgba(9, 30, 66, 0.31),
-    0px 8px 12px rgba(9, 30, 66, 0.15);
+  box-shadow: 0px 0px 1px rgba(9, 30, 66, 0.31), 0px 8px 12px rgba(9, 30, 66, 0.15);
 
   .modal__header {
     display: flex;

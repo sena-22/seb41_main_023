@@ -12,7 +12,7 @@ import SinglePlanBox from './SinglePlanBox';
 import { getCookie } from '../../Util/Cookies';
 import { formatDateAndWeekdayKo } from '../../Util/dayUtil';
 
-const PlanSection = props => {
+const PlanSection = (props) => {
   const {
     searchBox,
     setSearchBox,
@@ -44,11 +44,11 @@ const PlanSection = props => {
   const planDateRef = useRef([]);
   const itineraryRef = useRef();
   const budgetingRef = useRef();
-  const onDateClick = planDateId => {
+  const onDateClick = (planDateId) => {
     planDateRef.current[planDateId].scrollIntoView({ behavior: 'smooth' });
   };
 
-  const onTabClick = ref => {
+  const onTabClick = (ref) => {
     ref.current.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -65,10 +65,7 @@ const PlanSection = props => {
     if (budget.expectedBudget < 1) {
       // return alert('예산을 설정해주세요.');
       onTabClick(budgetingRef);
-    } else if (
-      budget.expectedBudget <
-      parseInt(budget.totalExpenses) + parseInt(price)
-    ) {
+    } else if (budget.expectedBudget < parseInt(budget.totalExpenses) + parseInt(price)) {
       alert('예산을 초과하였습니다.');
       setAddExpenseModal(true);
     } else if (price < 1) {
@@ -91,15 +88,15 @@ const PlanSection = props => {
             },
           },
         )
-        .then(res => {
+        .then((res) => {
           setExpenses([...expenses, res.data]); //비용에 추가
         })
-        .then(res => {
+        .then((res) => {
           setAddExpenseModal(false);
           handleRefresh();
           handleBudgetRefresh();
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     }
@@ -109,10 +106,7 @@ const PlanSection = props => {
     <Container>
       <ItineraryContainer>
         <div className={'section__nav'}>
-          <div
-            className="itinerary__nav"
-            onClick={() => onTabClick(itineraryRef)}
-          >
+          <div className="itinerary__nav" onClick={() => onTabClick(itineraryRef)}>
             Itinerary
           </div>
           <div className="budget__nav" onClick={() => onTabClick(budgetingRef)}>
@@ -146,13 +140,11 @@ const PlanSection = props => {
             </InputContainer>
             <PlanContainer>
               {singlePlanData !== null
-                ? singlePlanData.map(singleData => (
+                ? singlePlanData.map((singleData) => (
                     <SectionComponent key={singleData.planDateId}>
                       <h3
                         className="plan__heading"
-                        ref={element =>
-                          (planDateRef.current[singleData.planDateId] = element)
-                        }
+                        ref={(element) => (planDateRef.current[singleData.planDateId] = element)}
                       >
                         {formatDateAndWeekdayKo(singleData.planDate)}
                       </h3>
@@ -206,10 +198,7 @@ const PlanSection = props => {
               budgetRefresh={budgetRefresh}
               handleBudgetRefresh={handleBudgetRefresh}
             />
-            <button
-              className="button--default button--subtle button--top"
-              onClick={TopMove}
-            >
+            <button className="button--default button--subtle button--top" onClick={TopMove}>
               Top
             </button>
           </Fragment>

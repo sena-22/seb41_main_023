@@ -9,7 +9,7 @@ const LoadingPage = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const getURLSearchParams = key => {
+    const getURLSearchParams = (key) => {
       return new URLSearchParams(location.search).get(key);
     };
     const searchAccessToken = getURLSearchParams('accessToken');

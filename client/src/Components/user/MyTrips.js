@@ -21,33 +21,25 @@ const MyTrips = ({ mode }) => {
           Authorization: token,
         },
       })
-      .then(res => {
+      .then((res) => {
         if (mode === Mode.Write) {
-          setTripList(res.data.data.filter(trip => trip.boardCheck === false));
+          setTripList(res.data.data.filter((trip) => trip.boardCheck === false));
         } else {
           setTripList(res.data.data);
         }
       });
   }, []);
 
-  const handleNavigate = trip => {
-    navigate(
-      mode === Mode.Plan
-        ? `/itinerary/${trip.planId}`
-        : `/board/plan/${trip.planId}`,
-    );
+  const handleNavigate = (trip) => {
+    navigate(mode === Mode.Plan ? `/itinerary/${trip.planId}` : `/board/plan/${trip.planId}`);
   };
 
   return (
     <MyTripsContainer>
       <h2>My Trips</h2>
       <div className="contents">
-        {tripList.map(trip => (
-          <div
-            className="my-trips__card"
-            key={trip.planId}
-            onClick={() => handleNavigate(trip)}
-          >
+        {tripList.map((trip) => (
+          <div className="my-trips__card" key={trip.planId} onClick={() => handleNavigate(trip)}>
             <img alt="place_image" src={trip.city.cityImage} />
             <div className="meta_title">{trip.planTitle}</div>
             <div className="meta_content">

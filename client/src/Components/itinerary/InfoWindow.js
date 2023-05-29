@@ -75,11 +75,10 @@ const InfoContainer = styled.div`
   }
 `;
 
-const InfoWindow = props => {
+const InfoWindow = (props) => {
   const { singleData, setActiveMarker } = props;
 
-  const { placeName, openingHours, phone, placeAddress, ratings, website } =
-    singleData;
+  const { placeName, openingHours, phone, placeAddress, ratings, website } = singleData;
 
   return (
     <Fragment>
@@ -102,9 +101,7 @@ const InfoWindow = props => {
               {openingHours ? <h6 className="title">영업시간</h6> : null}
               <div className="hours__list">
                 {openingHours
-                  ? openingHours
-                      .split(',')
-                      .map((day, idx) => <p key={idx}>{day}</p>)
+                  ? openingHours.split(',').map((day, idx) => <p key={idx}>{day}</p>)
                   : null}
               </div>
             </div>

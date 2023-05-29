@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import SinglePlan from './SinglePlan';
 
-const SinglePlanBox = props => {
+const SinglePlanBox = (props) => {
   const {
     setAddExpenseModal,
     singleData,

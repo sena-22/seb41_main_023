@@ -19,7 +19,7 @@ const UserProfileEdit = () => {
   });
   const nameRef = useRef([]);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setSubmitInfo({
       ...submitInfo,
       [e.target.name]: e.target.value,
@@ -48,7 +48,7 @@ const UserProfileEdit = () => {
           Authorization: token,
         },
       })
-      .then(res => setUserInfo(res.data));
+      .then((res) => setUserInfo(res.data));
   };
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const UserProfileEdit = () => {
   }, [refresh]);
 
   //유저 정보 patch 요청
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const nameRegex = /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{1,20}$/;
@@ -78,7 +78,7 @@ const UserProfileEdit = () => {
             { ...data },
             { headers: { Authorization: token } },
           )
-          .then(res => {
+          .then((res) => {
             setUserInfo({ ...userInfo, displayName: res.data.displayName });
             nameRef.current.value = '';
           });
@@ -90,17 +90,13 @@ const UserProfileEdit = () => {
     {
       name: 'General',
       content: (
-        <General
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          nameRef={nameRef}
-        />
+        <General handleChange={handleChange} handleSubmit={handleSubmit} nameRef={nameRef} />
       ),
     },
     { name: 'Password', content: <Password /> },
   ];
 
-  const selectMenuHandler = index => {
+  const selectMenuHandler = (index) => {
     clickTab(index);
   };
 
@@ -108,7 +104,7 @@ const UserProfileEdit = () => {
   const SettingUserThumbnail = () => {
     const inputRef = useRef(null);
 
-    const onUploadImage = async e => {
+    const onUploadImage = async (e) => {
       if (!e.target.files) {
         return;
       }
@@ -124,7 +120,7 @@ const UserProfileEdit = () => {
             'Content-Type': 'multipart/form-data',
           },
           data: formData,
-        }).then(res => {
+        }).then((res) => {
           setUserInfo({ ...userInfo, profileImage: res.data.profileImage });
           window.location.reload();
         });
@@ -147,11 +143,7 @@ const UserProfileEdit = () => {
           ref={inputRef}
           onChange={onUploadImage}
         />
-        <button
-          className="upload_Image"
-          label="Edit image"
-          onClick={onUploadImageButtonClick}
-        >
+        <button className="upload_Image" label="Edit image" onClick={onUploadImageButtonClick}>
           Edit image
         </button>
       </SettingUserThumbnailContainer>
@@ -164,11 +156,7 @@ const UserProfileEdit = () => {
       <Main>
         <TopContainer>
           <div className="user_meta_left">
-            <img
-              className="profile_image"
-              alt="profile_image"
-              src={userInfo.profileImage}
-            />
+            <img className="profile_image" alt="profile_image" src={userInfo.profileImage} />
             <SettingUserThumbnail />
           </div>
           <div className="user_meta_right">

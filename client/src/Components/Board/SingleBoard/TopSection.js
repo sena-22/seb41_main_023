@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { getCookie } from '../../../Util/Cookies';
 
-const TopSection = props => {
+const TopSection = (props) => {
   const navigate = useNavigate();
   const { boardData, handleRefresh } = props;
 
@@ -25,7 +25,7 @@ const TopSection = props => {
   } = boardData;
 
   // 좋아요 기능
-  const changeLikes = boardId => {
+  const changeLikes = (boardId) => {
     axios
       .post(
         `${process.env.REACT_APP_API_URL}/board/${boardId}/likes`,
@@ -36,18 +36,15 @@ const TopSection = props => {
           },
         },
       )
-      .then(res => handleRefresh())
-      .catch(err => console.log(err));
+      .then((res) => handleRefresh())
+      .catch((err) => console.log(err));
   };
 
   return (
     <TopContainer cityImage={cityImage}>
       <div className="top__gradient-bg"></div>
       <Header>
-        <div
-          className="button--default back__button"
-          onClick={() => navigate(-1)}
-        >
+        <div className="button--default back__button" onClick={() => navigate(-1)}>
           Back
         </div>
         <div className="edit__like">
@@ -64,7 +61,7 @@ const TopSection = props => {
           {token && (
             <div
               className={checkLikes ? 'meta_likes likes' : 'meta_likes'}
-              onClick={e => {
+              onClick={(e) => {
                 e.stopPropagation();
                 changeLikes(boardId);
               }}
@@ -106,7 +103,7 @@ const TopContainer = styled.div`
   width: 50vw;
   height: 350px;
   background-color: var(--primary-blue-light-1);
-  background-image: url(${props => props.cityImage});
+  background-image: url(${(props) => props.cityImage});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -118,21 +115,13 @@ const TopContainer = styled.div`
     width: 50vw;
     height: 350px;
     background: rgb(15, 15, 15);
-    background: -moz-linear-gradient(
-      0deg,
-      rgba(15, 15, 15, 0.5) 0%,
-      rgba(255, 255, 255, 0) 100%
-    );
+    background: -moz-linear-gradient(0deg, rgba(15, 15, 15, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
     background: -webkit-linear-gradient(
       0deg,
       rgba(15, 15, 15, 0.5) 0%,
       rgba(255, 255, 255, 0) 100%
     );
-    background: linear-gradient(
-      0deg,
-      rgba(15, 15, 15, 0.5) 0%,
-      rgba(255, 255, 255, 0) 100%
-    );
+    background: linear-gradient(0deg, rgba(15, 15, 15, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0f0f0f",endColorstr="#ffffff",GradientType=1);
     z-index: 1;
   }

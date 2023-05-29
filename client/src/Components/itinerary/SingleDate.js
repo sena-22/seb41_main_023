@@ -2,7 +2,7 @@ import { StyledOptionItem } from './PlanDropDown';
 
 import { formatMonthAndDay } from '../../Util/dayUtil';
 
-const SingleDate = props => {
+const SingleDate = (props) => {
   const { id, data, setIsShow, setSelected, setSelectedDateId } = props;
 
   return (

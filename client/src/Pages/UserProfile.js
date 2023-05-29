@@ -25,7 +25,7 @@ const UserProfile = () => {
           Authorization: token,
         },
       })
-      .then(res => setUserInfo(res.data));
+      .then((res) => setUserInfo(res.data));
   };
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const UserProfile = () => {
         headers: {
           Authorization: token,
         },
-      }).then(res => {
+      }).then((res) => {
         removeCookie('accessToken');
         removeCookie('memberId');
         localStorage.removeItem('refreshToken');
@@ -70,10 +70,7 @@ const UserProfile = () => {
               >
                 Edit profile
               </button>
-              <button
-                className="button--default button--subtle"
-                onClick={handleSignOut}
-              >
+              <button className="button--default button--subtle" onClick={handleSignOut}>
                 Sign out
               </button>
             </div>
@@ -207,8 +204,7 @@ const UserProfileContainer = styled.div`
       margin: var(--spacing-3);
       background-color: var(--light-gray-2);
       border-radius: 3px;
-      box-shadow: 0px 0px 1px rgba(9, 30, 66, 0.31),
-        0px 8px 12px rgba(9, 30, 66, 0.15);
+      box-shadow: 0px 0px 1px rgba(9, 30, 66, 0.31), 0px 8px 12px rgba(9, 30, 66, 0.15);
 
       > div {
         display: inline-flex;

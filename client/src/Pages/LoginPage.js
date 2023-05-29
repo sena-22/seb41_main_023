@@ -30,13 +30,10 @@ const LoginPage = () => {
   // 로그인 요청
   const login = async () => {
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/members/login`,
-        {
-          email,
-          password,
-        },
-      );
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/members/login`, {
+        email,
+        password,
+      });
       console.log(response);
 
       if (response.status === 200) {
@@ -49,9 +46,7 @@ const LoginPage = () => {
     } catch (err) {
       console.error(err);
       if (err.response.status === 401) {
-        alert(
-          '이메일 또는 비밀번호를 잘못 입력하셨거나 등록되지 않은 회원입니다.',
-        );
+        alert('이메일 또는 비밀번호를 잘못 입력하셨거나 등록되지 않은 회원입니다.');
         pref.current.value = '';
       } else if (err.response.status === 400) alert('탈퇴한 회원입니다.');
       else if (err.response.status === 404) alert('페이지를 찾을 수 없습니다.');
@@ -60,21 +55,16 @@ const LoginPage = () => {
   };
 
   // 로그인, 모든 유효성 검사가 통과 되어야 login 가능
-  const onLogin = e => {
+  const onLogin = (e) => {
     //e.preventDefault();
-    if (
-      email.length !== 0 &&
-      password.length !== 0 &&
-      isEmail === true &&
-      isPassword === true
-    )
+    if (email.length !== 0 && password.length !== 0 && isEmail === true && isPassword === true)
       login();
     else if (!isEmail) alert('Email을 확인해주세요.');
     else if (!isPassword) alert('Password를 확인해주세요.');
   };
 
   // email
-  const onChangeEmail = useCallback(e => {
+  const onChangeEmail = useCallback((e) => {
     const emailRegex =
       /^[0-9a-zA-Z_]{4,}([-_.]?[0-9a-zA-Z])*@[a-zA-Z]{3,}([-_.]?[a-zA-Z])*.[a-zA-Z]{2,}$/i;
     setEmail(e.target.value);
@@ -89,9 +79,8 @@ const LoginPage = () => {
   }, []);
 
   // password
-  const onChangePassword = useCallback(e => {
-    const passwordRegex =
-      /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=\S+$).{8,20}$/;
+  const onChangePassword = useCallback((e) => {
+    const passwordRegex = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=\S+$).{8,20}$/;
     setPassword(e.target.value);
 
     if (!passwordRegex.test(e.target.value)) {
@@ -106,22 +95,19 @@ const LoginPage = () => {
   }, []);
 
   // email 'enter' -> pw
-  const emailEnter = e => {
+  const emailEnter = (e) => {
     if (e.key === 'Enter') pref.current.focus();
   };
 
   // pw 'enter' -> login
-  const pwEnter = e => {
+  const pwEnter = (e) => {
     if (e.key === 'Enter') onLogin();
   };
 
   return (
     <>
       <Header>
-        <div
-          className="button--default back__button"
-          onClick={() => navigate('/')}
-        >
+        <div className="button--default back__button" onClick={() => navigate('/')}>
           Back
         </div>
       </Header>
@@ -141,9 +127,7 @@ const LoginPage = () => {
             ref={eref}
           />
           {email.length > 0 && (
-            <div className={`input__message__${isEmail ? 'success' : 'error'}`}>
-              {emailMessage}
-            </div>
+            <div className={`input__message__${isEmail ? 'success' : 'error'}`}>{emailMessage}</div>
           )}
 
           <label>Password</label>
@@ -156,9 +140,7 @@ const LoginPage = () => {
             ref={pref}
           />
           {password.length > 0 && (
-            <div
-              className={`input__message__${isPassword ? 'success' : 'error'}`}
-            >
+            <div className={`input__message__${isPassword ? 'success' : 'error'}`}>
               {passwordMessage}
             </div>
           )}
@@ -168,9 +150,7 @@ const LoginPage = () => {
           </button>
           <button
             className="button--google"
-            onClick={() =>
-              navigate(`${process.env.REACT_APP_API_SOCIAL_LOGIN}/google`)
-            }
+            onClick={() => navigate(`${process.env.REACT_APP_API_SOCIAL_LOGIN}/google`)}
           >
             <svg
               xlink="http://www.w3.org/1999/xlink"
@@ -201,36 +181,17 @@ const LoginPage = () => {
           </button>
           <button
             className="button--google"
-            onClick={() =>
-              navigate(`${process.env.REACT_APP_API_SOCIAL_LOGIN}/kakao`)
-            }
+            onClick={() => navigate(`${process.env.REACT_APP_API_SOCIAL_LOGIN}/kakao`)}
           >
-            <svg
-              id="kakao"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="-75 -90 350 350"
-            >
-              <polygon
-                className="kakao logo"
-                fill="#3c1e1e"
-                points="45 140 40 185 90 150 45 140"
-              />
-              <ellipse
-                className="kakao logo"
-                fill="#3c1e1e"
-                cx="100"
-                cy="80"
-                rx="100"
-                ry="80"
-              />
+            <svg id="kakao" xmlns="http://www.w3.org/2000/svg" viewBox="-75 -90 350 350">
+              <polygon className="kakao logo" fill="#3c1e1e" points="45 140 40 185 90 150 45 140" />
+              <ellipse className="kakao logo" fill="#3c1e1e" cx="100" cy="80" rx="100" ry="80" />
             </svg>
             Log in with Kakao
           </button>
           <button
             className="button--google"
-            onClick={() =>
-              navigate(`${process.env.REACT_APP_API_SOCIAL_LOGIN}/facebook`)
-            }
+            onClick={() => navigate(`${process.env.REACT_APP_API_SOCIAL_LOGIN}/facebook`)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

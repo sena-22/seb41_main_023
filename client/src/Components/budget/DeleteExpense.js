@@ -1,10 +1,6 @@
-import Modal from "../user/Modal";
+import Modal from '../user/Modal';
 
-const DeleteExpense = ({
-  expenseId,
-  handleDeleteExpense,
-  setDeleteExpenseModal,
-}) => {
+const DeleteExpense = ({ expenseId, handleDeleteExpense, setDeleteExpenseModal }) => {
   return (
     <Modal
       title="지출 내역을 삭제하시겠습니까?"

@@ -105,13 +105,7 @@ const PlanDeleteContainer = styled.div`
 `;
 
 const moneySvg = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 16 16"
-    fill="none"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -131,7 +125,7 @@ const deleteSvg = (
   </svg>
 );
 
-const SinglePlan = props => {
+const SinglePlan = (props) => {
   const {
     idx,
     handleZoom,
@@ -160,10 +154,10 @@ const SinglePlan = props => {
   };
 
   const onMouseHandler = () => {
-    setDelButtonIsShow(prevState => !prevState);
+    setDelButtonIsShow((prevState) => !prevState);
   };
 
-  const handleDeletePlan = selectedPlaceId => {
+  const handleDeletePlan = (selectedPlaceId) => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       axios
         .delete(`${process.env.REACT_APP_API_URL}/places/${selectedPlaceId}`, {
@@ -171,11 +165,11 @@ const SinglePlan = props => {
             Authorization: getCookie('accessToken'),
           },
         })
-        .then(res => {
+        .then((res) => {
           handleRefresh();
           handleBudgetRefresh();
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     }
   };
 
@@ -196,19 +190,15 @@ const SinglePlan = props => {
           },
         },
       )
-      .then(res => {
+      .then((res) => {
         setEditExpenseModal(false);
         handleBudgetRefresh();
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   return (
-    <SectionWrapper
-      key={data.placeId}
-      onMouseEnter={onMouseHandler}
-      onMouseLeave={onMouseHandler}
-    >
+    <SectionWrapper key={data.placeId} onMouseEnter={onMouseHandler} onMouseLeave={onMouseHandler}>
       <PlaceInfoBox
         onClick={() => {
           handleGeoCode(data.latitude, data.longitude);
@@ -258,9 +248,7 @@ const SinglePlan = props => {
         </div>
       </PlaceInfoBox>
       <PlanDeleteContainer className="delete__container ">
-        <button onClick={() => handleDeletePlan(data.placeId)}>
-          {deleteSvg}
-        </button>
+        <button onClick={() => handleDeletePlan(data.placeId)}>{deleteSvg}</button>
       </PlanDeleteContainer>
     </SectionWrapper>
   );

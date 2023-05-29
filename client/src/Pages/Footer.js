@@ -117,56 +117,28 @@ function Footer(props) {
         <div className="team__intro">
           <div className="front__end">
             <h3 className="team__title">Front-End</h3>
-            <a
-              href={'https://github.com/seungheonkim'}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={'https://github.com/seungheonkim'} target="_blank" rel="noreferrer">
               김승헌
             </a>
-            <a
-              href={'https://github.com/sena-22'}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={'https://github.com/sena-22'} target="_blank" rel="noreferrer">
               김현정
             </a>
-            <a
-              href={'https://github.com/uk11'}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={'https://github.com/uk11'} target="_blank" rel="noreferrer">
               이창욱
             </a>
-            <a
-              href={'https://github.com/ashleysyheo'}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={'https://github.com/ashleysyheo'} target="_blank" rel="noreferrer">
               허서영
             </a>
           </div>
           <div className="back__end">
             <h3 className="team__title">Back-End</h3>
-            <a
-              href={'https://github.com/kimmj13'}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={'https://github.com/kimmj13'} target="_blank" rel="noreferrer">
               김민정
             </a>
-            <a
-              href={'https://github.com/hyejinme'}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={'https://github.com/hyejinme'} target="_blank" rel="noreferrer">
               김혜진
             </a>
-            <a
-              href={'https://github.com/Yujeu07'}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={'https://github.com/Yujeu07'} target="_blank" rel="noreferrer">
               유제웅
             </a>
           </div>

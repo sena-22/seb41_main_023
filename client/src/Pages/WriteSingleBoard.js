@@ -53,7 +53,7 @@ const WriteSingleBoard = () => {
           Authorization: token,
         },
       })
-      .then(res => {
+      .then((res) => {
         setMainData(res.data);
         setTitle(res.data.planTitle);
         setDays(res.data.days);
@@ -67,7 +67,7 @@ const WriteSingleBoard = () => {
   }, [planId, token]);
 
   // 창 닫기 & 새로고침 막기
-  const preventClose = e => {
+  const preventClose = (e) => {
     e.preventDefault();
     e.returnValue = '';
   };
@@ -82,7 +82,7 @@ const WriteSingleBoard = () => {
     };
   }, []);
 
-  const handleZoom = el => {
+  const handleZoom = (el) => {
     setZoom(el);
   };
 
@@ -103,7 +103,7 @@ const WriteSingleBoard = () => {
         },
         data: data,
       })
-        .then(res => navigate(`/board/${res.data.boardId}`, { replace: true }))
+        .then((res) => navigate(`/board/${res.data.boardId}`, { replace: true }))
         .then(() => {
           axios({
             method: 'PATCH',
@@ -118,9 +118,9 @@ const WriteSingleBoard = () => {
   };
 
   //장소별 note 변경
-  const handleChangeNote = e => {
+  const handleChangeNote = (e) => {
     let findIndex = placeNotes.findIndex(
-      comment => Number(comment.placeId) === Number(e.target.name),
+      (comment) => Number(comment.placeId) === Number(e.target.name),
     );
 
     if (findIndex === -1) {
@@ -158,7 +158,7 @@ const WriteSingleBoard = () => {
           className="travel-experience__text-area"
           placeholder="Share your travel experience"
           defaultValue={content}
-          onChange={e => setContent(e.target.value)}
+          onChange={(e) => setContent(e.target.value)}
         ></textarea>
         <ItineraryWrapper>
           <h3 className="section__title">Itinerary</h3>
@@ -168,7 +168,7 @@ const WriteSingleBoard = () => {
                 <div className="itinerary__item" key={idx}>
                   <div className="itinerary__day">{day.day}</div>
                   <div className="itinerary__plan-container">
-                    {day.placeDetails.map(place => (
+                    {day.placeDetails.map((place) => (
                       <div
                         key={place.index}
                         onClick={() => {
@@ -181,12 +181,8 @@ const WriteSingleBoard = () => {
                         </div>
                         <div className="place-info__main">
                           <div className="place-info__top">
-                            <div className="location-name">
-                              {place.placeName}
-                            </div>
-                            <div className="location-address">
-                              {place.placeAddress}
-                            </div>
+                            <div className="location-name">{place.placeName}</div>
+                            <div className="location-address">{place.placeAddress}</div>
                           </div>
                           <form className="location-memo__container">
                             <textarea
@@ -194,7 +190,7 @@ const WriteSingleBoard = () => {
                               type="text"
                               name={place.placeId}
                               placeholder="Add note"
-                              onChange={e => handleChangeNote(e)}
+                              onChange={(e) => handleChangeNote(e)}
                             ></textarea>
                             <input
                               type="reset"
@@ -213,11 +209,7 @@ const WriteSingleBoard = () => {
       </MainContainer>
       <MapBox>
         {isLoaded && (
-          <GoogleMap
-            zoom={zoom}
-            center={geocode}
-            mapContainerStyle={mapContainerStyle}
-          >
+          <GoogleMap zoom={zoom} center={geocode} mapContainerStyle={mapContainerStyle}>
             {days.map((day, idx) => (
               <div key={idx}>
                 <div>{day.planDate}</div>

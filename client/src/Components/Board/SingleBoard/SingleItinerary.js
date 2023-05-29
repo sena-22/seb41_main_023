@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 import StarRate from '../../itinerary/StarRate';
 
-const SingleItinerary = props => {
+const SingleItinerary = (props) => {
   const { data, handleGeoCode } = props;
 
   return (
     <Container>
       {data
-        ? data.map(place => (
+        ? data.map((place) => (
             <SinglePlanContainer
               key={place.index}
               onClick={() => {

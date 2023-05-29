@@ -4,12 +4,7 @@ import styled from 'styled-components';
 
 import { getCookie } from '../../../Util/Cookies';
 
-const SingleComment = ({
-  comment,
-  commentId,
-  handleCommentRefresh,
-  memberId,
-}) => {
+const SingleComment = ({ comment, commentId, handleCommentRefresh, memberId }) => {
   const userMemberId = Number(getCookie('memberId'));
   const [isEdit, setIsEdit] = useState(false);
   const editRef = useRef();
@@ -19,24 +14,20 @@ const SingleComment = ({
     setEditMode(!editMode);
   };
   //수정
-  const handleEditComment = commentId => {
+  const handleEditComment = (commentId) => {
     const editedComment = { comment: editRef.current?.value };
     axios
-      .patch(
-        `${process.env.REACT_APP_API_URL}/comments/${commentId}`,
-        editedComment,
-        {
-          headers: {
-            Authorization: getCookie('accessToken'),
-          },
+      .patch(`${process.env.REACT_APP_API_URL}/comments/${commentId}`, editedComment, {
+        headers: {
+          Authorization: getCookie('accessToken'),
         },
-      )
-      .then(res => {
+      })
+      .then((res) => {
         handleCommentRefresh();
         setIsEdit(false);
         setEditMode(!editMode);
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.response.status === 400) {
           alert(
             `댓글은 ${err.response.data.fieldErrors[0].reason}. 최소 1글자 입력 후 수정 버튼을 눌러주세요!`,
@@ -45,7 +36,7 @@ const SingleComment = ({
       });
   };
 
-  const handleDeleteComment = commentId => {
+  const handleDeleteComment = (commentId) => {
     if (window.confirm('댓글을 삭제하시겠습니까?')) {
       axios
         .delete(`${process.env.REACT_APP_API_URL}/comments/${commentId}`, {
@@ -53,18 +44,15 @@ const SingleComment = ({
             Authorization: getCookie('accessToken'),
           },
         })
-        .then(res => handleCommentRefresh())
-        .catch(err => console.log(err));
+        .then((res) => handleCommentRefresh())
+        .catch((err) => console.log(err));
     }
   };
 
   return (
     <SingleCommentWrapper>
       <div className="comment__user-image">
-        <img
-          src={comment.profileImage}
-          alt={`${comment.displayName}의 이미지`}
-        />
+        <img src={comment.profileImage} alt={`${comment.displayName}의 이미지`} />
       </div>
       <div className="comment__content">
         <div className="comment__main">
@@ -84,7 +72,7 @@ const SingleComment = ({
                   defaultValue={`${comment.comment}`}
                   ref={editRef}
                   autoFocus
-                  onKeyUp={e => {
+                  onKeyUp={(e) => {
                     if (e.key === 'Enter') {
                       return handleEditComment(commentId);
                     }

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import SingleItinerary from './SingleItinerary';
 
-const BoardSection = props => {
+const BoardSection = (props) => {
   const { boardData, handleGeoCode } = props;
   const { content, days } = boardData;
 
@@ -26,10 +26,7 @@ const BoardSection = props => {
           ? days.map((day, idx) => (
               <ItineraryItem key={idx}>
                 <div className={'itinerary__day'}>{day.day}</div>
-                <SingleItinerary
-                  data={day.placeDetails}
-                  handleGeoCode={handleGeoCode}
-                />
+                <SingleItinerary data={day.placeDetails} handleGeoCode={handleGeoCode} />
               </ItineraryItem>
             ))
           : null}

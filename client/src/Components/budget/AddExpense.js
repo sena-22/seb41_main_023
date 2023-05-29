@@ -5,7 +5,7 @@ import Category from './Category';
 
 import { formatDateAndWeekdayKo } from '../../Util/dayUtil';
 
-const AddExpense = props => {
+const AddExpense = (props) => {
   const {
     currentPlaceId,
     planDate,
@@ -29,13 +29,13 @@ const AddExpense = props => {
   const [selectedPlace, setSelectedPlace] = useState(null);
 
   //카테고리 변경
-  const handleCategory = el => {
+  const handleCategory = (el) => {
     setSelectedCategory(el);
     setCategory(false);
   };
 
   // 지출 금액, 지출 항목 변경
-  const handleInputs = e => {
+  const handleInputs = (e) => {
     // 지출 금액에 숫자 외의 입력 값은 ""로 대체
     if (e.target.name === 'price') {
       const value = e.target.value;
@@ -59,7 +59,7 @@ const AddExpense = props => {
     <>
       {addExpenseModal ? (
         <ModalContainer onClick={handleClear}>
-          <ModalWrapper onClick={e => e.stopPropagation()}>
+          <ModalWrapper onClick={(e) => e.stopPropagation()}>
             <div className="modal__header">
               <div className="title">Add expense</div>
               <div className="cancel-button" onClick={handleClear}>
@@ -99,24 +99,15 @@ const AddExpense = props => {
                 />
               </div>
               <div className="input__container">
-                <Category
-                  setCategory={setCategory}
-                  handleCategory={handleCategory}
-                />
+                <Category setCategory={setCategory} handleCategory={handleCategory} />
               </div>
               <div className="input__container">
-                <div
-                  className="input__item"
-                  onClick={() => setDateCategory(!dateCategory)}
-                >
+                <div className="input__item" onClick={() => setDateCategory(!dateCategory)}>
                   {formatDateAndWeekdayKo(planDate) || '날짜를 선택하세요'}
                 </div>
               </div>
               <div className="input__container">
-                <div
-                  className="input__item"
-                  onClick={() => setPlaceCategory(!placeCategory)}
-                >
+                <div className="input__item" onClick={() => setPlaceCategory(!placeCategory)}>
                   {currentPlace || '장소를 선택하세요'}
                 </div>
               </div>
@@ -133,12 +124,7 @@ const AddExpense = props => {
               <button
                 className="button--primary"
                 onClick={() => {
-                  handleAddExpense(
-                    inputs.price,
-                    selectedCategory,
-                    inputs.item,
-                    currentPlaceId,
-                  );
+                  handleAddExpense(inputs.price, selectedCategory, inputs.item, currentPlaceId);
                   if (
                     budget.expectedBudget <
                     parseInt(budget.totalExpenses) + parseInt(inputs.price)
@@ -156,10 +142,7 @@ const AddExpense = props => {
               >
                 비용 추가
               </button>
-              <button
-                className="button--default button--subtle"
-                onClick={handleClear}
-              >
+              <button className="button--default button--subtle" onClick={handleClear}>
                 취소
               </button>
             </div>
@@ -190,8 +173,7 @@ const ModalWrapper = styled.div`
   min-width: 460px;
   background-color: var(--white);
   border-radius: 5px;
-  box-shadow: 0px 0px 1px rgba(9, 30, 66, 0.31),
-    0px 8px 12px rgba(9, 30, 66, 0.15);
+  box-shadow: 0px 0px 1px rgba(9, 30, 66, 0.31), 0px 8px 12px rgba(9, 30, 66, 0.15);
 
   .modal__header {
     display: flex;

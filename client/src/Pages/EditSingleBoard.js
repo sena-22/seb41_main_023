@@ -52,7 +52,7 @@ const EditSingleBoard = () => {
           Authorization: token,
         },
       })
-      .then(res => {
+      .then((res) => {
         setMainData(res.data);
         setTitle(res.data.title);
         setContent(res.data.content);
@@ -64,8 +64,8 @@ const EditSingleBoard = () => {
             lng: startPlace.longitude,
           });
 
-        res.data.days.map(day =>
-          day.placeDetails.map(place =>
+        res.data.days.map((day) =>
+          day.placeDetails.map((place) =>
             setPlaceNotes([
               ...placeNotes,
               {
@@ -79,7 +79,7 @@ const EditSingleBoard = () => {
   }, []);
 
   // 창 닫기 & 새로고침 막기
-  const preventClose = e => {
+  const preventClose = (e) => {
     e.preventDefault();
     e.returnValue = '';
   };
@@ -94,7 +94,7 @@ const EditSingleBoard = () => {
     };
   }, []);
 
-  const handleZoom = el => {
+  const handleZoom = (el) => {
     setZoom(el);
   };
 
@@ -116,7 +116,7 @@ const EditSingleBoard = () => {
         },
         data: data,
       })
-        .then(res => navigate(`/board/${res.data.boardId}`, { replace: true }))
+        .then((res) => navigate(`/board/${res.data.boardId}`, { replace: true }))
         .then(() => {
           axios({
             method: 'PATCH',
@@ -139,14 +139,14 @@ const EditSingleBoard = () => {
         headers: {
           Authorization: token,
         },
-      }).then(res => navigate(`/board/plan`));
+      }).then((res) => navigate(`/board/plan`));
     }
   };
 
   //장소별 note 변경
-  const handleChangeNote = e => {
+  const handleChangeNote = (e) => {
     let findIndex = placeNotes.findIndex(
-      placeNote => Number(placeNote.placeId) === Number(e.target.name),
+      (placeNote) => Number(placeNote.placeId) === Number(e.target.name),
     );
 
     if (findIndex === -1) {
@@ -169,13 +169,9 @@ const EditSingleBoard = () => {
   const memoRef = useRef({});
 
   //입력값 초기화
-  const handelClear = id => {
-    let findIndex = placeNotes.findIndex(
-      placeNote => Number(placeNote.placeId) === Number(id),
-    );
-    const placeId = Object.keys(memoRef.current).filter(
-      key => Number(key) === id,
-    );
+  const handelClear = (id) => {
+    let findIndex = placeNotes.findIndex((placeNote) => Number(placeNote.placeId) === Number(id));
+    const placeId = Object.keys(memoRef.current).filter((key) => Number(key) === id);
     memoRef.current[placeId].value = '';
     let changeNotes = [...placeNotes];
     changeNotes[findIndex].description = '';
@@ -201,7 +197,7 @@ const EditSingleBoard = () => {
           className="travel-experience__text-area"
           placeholder="Share your travel experience"
           defaultValue={content}
-          onChange={e => setContent(e.target.value)}
+          onChange={(e) => setContent(e.target.value)}
         ></textarea>
         <ItineraryWrapper>
           <h3 className="section__title">Itinerary</h3>
@@ -211,7 +207,7 @@ const EditSingleBoard = () => {
                 <div className="itinerary__item" key={idx}>
                   <div className="itinerary__day">{day.day}</div>
                   <div className="itinerary__plan-container">
-                    {day.placeDetails.map(place => (
+                    {day.placeDetails.map((place) => (
                       <div
                         key={place.placeId}
                         onClick={() => {
@@ -224,19 +220,15 @@ const EditSingleBoard = () => {
                         </div>
                         <div className="place-info__main">
                           <div className="place-info__top">
-                            <div className="location-name">
-                              {place.placeName}
-                            </div>
-                            <div className="location-address">
-                              {place.placeAddress}
-                            </div>
+                            <div className="location-name">{place.placeName}</div>
+                            <div className="location-address">{place.placeAddress}</div>
                           </div>
                           <div className="location-memo__container">
                             <textarea
                               className="location-memo__text-area"
                               name={place.placeId}
-                              onChange={e => handleChangeNote(e)}
-                              ref={el => (memoRef.current[place.placeId] = el)}
+                              onChange={(e) => handleChangeNote(e)}
+                              ref={(el) => (memoRef.current[place.placeId] = el)}
                               defaultValue={place.description}
                             ></textarea>
                             <div
@@ -259,11 +251,7 @@ const EditSingleBoard = () => {
       </MainContainer>
       <MapBox>
         {isLoaded && (
-          <GoogleMap
-            zoom={zoom}
-            center={geocode}
-            mapContainerStyle={mapContainerStyle}
-          >
+          <GoogleMap zoom={zoom} center={geocode} mapContainerStyle={mapContainerStyle}>
             {days.map((day, idx) => (
               <div key={idx}>
                 <div>{day.planDate}</div>

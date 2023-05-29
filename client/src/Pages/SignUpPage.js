@@ -54,14 +54,13 @@ const SignUpPage = () => {
     } catch (err) {
       console.error(err);
       if (err.response.status === 404) alert('페이지를 찾을 수 없습니다.');
-      else if (err.response.status === 409)
-        alert('이미 가입된 회원입니다. 이메일을 확인해주세요.');
+      else if (err.response.status === 409) alert('이미 가입된 회원입니다. 이메일을 확인해주세요.');
       else if (err.response.status === 500) alert('서버 점검 중...');
     }
   };
 
   // 회원가입, 모든 유효성 검사가 통과되어야 sign up 가능
-  const onSignUp = e => {
+  const onSignUp = (e) => {
     //e.preventDefault();
     if (
       displayName.length !== 0 &&
@@ -80,7 +79,7 @@ const SignUpPage = () => {
   };
 
   // userName
-  const onChangeName = useCallback(e => {
+  const onChangeName = useCallback((e) => {
     const nameRegex = /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]{1,20}$/;
     setDisplayName(e.target.value);
 
@@ -94,7 +93,7 @@ const SignUpPage = () => {
   }, []);
 
   // email
-  const onChangeEmail = useCallback(e => {
+  const onChangeEmail = useCallback((e) => {
     const emailRegex =
       /^[0-9a-zA-Z_]{4,}([-_.]?[0-9a-zA-Z])*@[a-zA-Z]{3,}([-_.]?[a-zA-Z])*.[a-zA-Z]{2,}$/i;
     setEmail(e.target.value);
@@ -109,9 +108,8 @@ const SignUpPage = () => {
   }, []);
 
   // password
-  const onChangePassword = useCallback(e => {
-    const passwordRegex =
-      /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=\S+$).{8,20}$/;
+  const onChangePassword = useCallback((e) => {
+    const passwordRegex = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=\S+$).{8,20}$/;
     setPassword(e.target.value);
 
     if (!passwordRegex.test(e.target.value)) {
@@ -126,22 +124,22 @@ const SignUpPage = () => {
   }, []);
 
   // username 'enter' -> email
-  const usernameEnter = e => {
+  const usernameEnter = (e) => {
     if (e.key === 'Enter') eref.current.focus();
   };
 
   // email 'enter' -> pw
-  const emailEnter = e => {
+  const emailEnter = (e) => {
     if (e.key === 'Enter') pref.current.focus();
   };
 
   // pw 'enter' -> Sign up
-  const pwEnter = e => {
+  const pwEnter = (e) => {
     if (e.key === 'Enter') onSignUp();
   };
 
   const handleEmailVerificationModal = () => {
-    setVerificationIsOpened(prevState => !prevState);
+    setVerificationIsOpened((prevState) => !prevState);
     setDisable(true);
   };
 
@@ -158,14 +156,14 @@ const SignUpPage = () => {
           },
         },
       )
-      .then(res => {
+      .then((res) => {
         alert('인증번호가 발송되었습니다. 인증번호를 입력해주세요');
         setDisable(false);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
-  const handleEmailAuth = authNum => {
+  const handleEmailAuth = (authNum) => {
     axios
       .post(
         `${process.env.REACT_APP_API_URL}/email/confirm?authNum=${authNum}`,
@@ -178,13 +176,13 @@ const SignUpPage = () => {
           },
         },
       )
-      .then(res => {
+      .then((res) => {
         alert('이메일 인증이 완료되었습니다!');
         setVerificationIsOpened(false);
         setIsAuth(true);
         setAuthNum('');
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         alert('인증번호가 잘못되었습니다. 다시 한 번 입력해주세요!');
         setAuthNum('');
@@ -198,10 +196,7 @@ const SignUpPage = () => {
   return (
     <>
       <Header>
-        <div
-          className="button--default back__button"
-          onClick={() => navigate('/')}
-        >
+        <div className="button--default back__button" onClick={() => navigate('/')}>
           Back
         </div>
       </Header>
@@ -220,11 +215,7 @@ const SignUpPage = () => {
             ref={uref}
           />
           {displayName.length > 0 && (
-            <div
-              className={`input__message message__${
-                isName ? 'success' : 'error'
-              }`}
-            >
+            <div className={`input__message message__${isName ? 'success' : 'error'}`}>
               {nameMessage}
             </div>
           )}
@@ -333,9 +324,7 @@ const SignUpPage = () => {
           </button>
           <button
             className="button--google"
-            onClick={() =>
-              navigate(`${process.env.REACT_APP_API_SOCIAL_LOGIN}/google`)
-            }
+            onClick={() => navigate(`${process.env.REACT_APP_API_SOCIAL_LOGIN}/google`)}
           >
             <svg
               xlink="http://www.w3.org/1999/xlink"
@@ -366,36 +355,17 @@ const SignUpPage = () => {
           </button>
           <button
             className="button--google"
-            onClick={() =>
-              navigate(`${process.env.REACT_APP_API_SOCIAL_LOGIN}/kakao`)
-            }
+            onClick={() => navigate(`${process.env.REACT_APP_API_SOCIAL_LOGIN}/kakao`)}
           >
-            <svg
-              id="kakao"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="-75 -90 350 350"
-            >
-              <polygon
-                className="kakao logo"
-                fill="#3c1e1e"
-                points="45 140 40 185 90 150 45 140"
-              />
-              <ellipse
-                className="kakao logo"
-                fill="#3c1e1e"
-                cx="100"
-                cy="80"
-                rx="100"
-                ry="80"
-              />
+            <svg id="kakao" xmlns="http://www.w3.org/2000/svg" viewBox="-75 -90 350 350">
+              <polygon className="kakao logo" fill="#3c1e1e" points="45 140 40 185 90 150 45 140" />
+              <ellipse className="kakao logo" fill="#3c1e1e" cx="100" cy="80" rx="100" ry="80" />
             </svg>
             Sign up with Kakao
           </button>
           <button
             className="button--google"
-            onClick={() =>
-              navigate(`${process.env.REACT_APP_API_SOCIAL_LOGIN}/facebook`)
-            }
+            onClick={() => navigate(`${process.env.REACT_APP_API_SOCIAL_LOGIN}/facebook`)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

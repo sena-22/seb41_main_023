@@ -12,7 +12,7 @@ const mapContainerStyle = {
   top: '0',
   right: '0',
 };
-export const MapSection = props => {
+export const MapSection = (props) => {
   const { boardData, geocode, handleGeoCode } = props;
   const [libraries] = useState(['places']);
   const [isZoom, setIsZoom] = useState(13);

@@ -43,7 +43,7 @@ const Itinerary = () => {
   const [budgetRefresh, setBudgetRefresh] = useState(1);
 
   const handleBudgetRefresh = () => {
-    setBudgetRefresh(prevState => prevState * -1);
+    setBudgetRefresh((prevState) => prevState * -1);
   };
 
   //refresh function
@@ -59,7 +59,7 @@ const Itinerary = () => {
           withCredentials: true,
         },
       })
-      .then(res => {
+      .then((res) => {
         setMainData(res.data.data);
         setTitle(res.data.data.planTitle);
       });

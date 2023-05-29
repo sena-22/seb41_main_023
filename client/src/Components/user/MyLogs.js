@@ -21,43 +21,27 @@ const MyLogs = ({ mode }) => {
           Authorization: token,
         },
       })
-      .then(res => setLogList(res.data));
+      .then((res) => setLogList(res.data));
   }, []);
 
-  const handleNavigate = log => {
-    navigate(
-      mode === Mode.Plan
-        ? `/board/${log.boardId}`
-        : `/board/edit/${log.boardId}`,
-    );
+  const handleNavigate = (log) => {
+    navigate(mode === Mode.Plan ? `/board/${log.boardId}` : `/board/edit/${log.boardId}`);
   };
 
   return (
     <MyLogsContainer className="my-logs">
       <h2>My Logs</h2>
       <div className="contents">
-        {logList.map(log => (
-          <div
-            className="my-logs__card"
-            key={log.boardId}
-            onClick={() => handleNavigate(log)}
-          >
-            <img
-              className="meta__travel-image"
-              alt="place_image"
-              src={log.cityImage}
-            />
+        {logList.map((log) => (
+          <div className="my-logs__card" key={log.boardId} onClick={() => handleNavigate(log)}>
+            <img className="meta__travel-image" alt="place_image" src={log.cityImage} />
             <div className="meta_title">{log.title}</div>
             <div className="meta_content">
               {formatDateKo(log.travelPeriod.split('-')[0])} -{' '}
               {formatDateKo(log.travelPeriod.split('-')[1])}
             </div>
             <div className="meta_profile">
-              <img
-                className="profile__image"
-                alt="profile_image"
-                src={log.profileImage}
-              />
+              <img className="profile__image" alt="profile_image" src={log.profileImage} />
               <span>{log.displayName} </span>
             </div>
             <div className={log.checkLikes ? 'meta_likes likes' : 'meta_likes'}>

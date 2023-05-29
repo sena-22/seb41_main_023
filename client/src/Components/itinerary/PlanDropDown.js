@@ -22,11 +22,10 @@ export const StyledOptionList = styled.ul`
   max-height: 200px;
   overflow-y: scroll;
   border-radius: 3px;
-  box-shadow: 0px 0px 1px rgba(9, 30, 66, 0.31),
-    0px 4px 6px rgba(9, 30, 66, 0.15);
+  box-shadow: 0px 0px 1px rgba(9, 30, 66, 0.31), 0px 4px 6px rgba(9, 30, 66, 0.15);
   list-style: none;
   transition: all 0.1s ease-in;
-  display: ${props => (props.active ? 'block' : 'none')};
+  display: ${(props) => (props.active ? 'block' : 'none')};
   z-index: 1000000;
 
   ::-webkit-scrollbar {
@@ -51,22 +50,18 @@ export const StyledOptionItem = styled.li`
 `;
 
 const dropDownSvg = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    preserveAspectRatio="xMidYMid meet"
-    viewBox="0 0 24 24"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
     <path fill="currentColor" d="m7 10l5 5l5-5z" />
   </svg>
 );
 
-const PlanDropDown = props => {
+const PlanDropDown = (props) => {
   const { singlePlanData, setSelectedDateId } = props;
   const [selected, setSelected] = useState('날짜 선택');
   const [isShow, setIsShow] = useState(false);
 
   const showMenu = () => {
-    setIsShow(prevState => !prevState);
+    setIsShow((prevState) => !prevState);
   };
 
   return (
@@ -75,7 +70,7 @@ const PlanDropDown = props => {
         {selected}
       </button>
       <StyledOptionList active={isShow}>
-        {singlePlanData.map(data => (
+        {singlePlanData.map((data) => (
           <SingleDate
             key={data.planDateId}
             id={data.planDateId}
